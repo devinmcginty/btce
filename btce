@@ -1,0 +1,18 @@
+#!/bin/sh
+# Retrieve Bitcoin trade Information from BTC-E
+TIME="$(date +'%A, %B %e, %Y at %I:%m %p')"
+echo "BTE-E price for" $TIME
+
+BTCE=https://btc-e.com/api/3/ticker/btc_usd
+CONTENT="$(curl -s $BTCE|tr '[{,:]' '[   ]')"
+
+HIGH="$(echo $CONTENT|awk '{print $3}')"
+echo "High:\n\t"$HIGH "USD"
+
+LOW="$(echo $CONTENT|awk '{print $5}')"
+echo "Low:\n\t"$LOW "USD"
+
+AVERAGE="$(echo $CONTENT|awk '{print $7}')"
+echo "Average:\n\t"$AVERAGE "USD"
+
+exit 0
